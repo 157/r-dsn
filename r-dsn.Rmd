@@ -1,0 +1,25 @@
+---
+title: "r-dsn"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(ggsci)
+
+bt <- data.frame(
+  parties = factor(c("SC", "DPC", "CCS", "FC", "CCM"),
+                  levels = c("SC", "DPC", "CCS", "FC", "CCM")),
+  seats = c(110, 120, 115, 15, 200))
+palette <- ggsci::pal_ucscgb()(length(unique(bt$parties))) # SCI 期刊配色 
+colors <- c(palette)
+
+ggplot(bt) +
+  geom_parliament(aes(seats = seats, fill = parties), color = "black") +
+  scale_fill_manual(values = palette, labels = levels(bt$parties)) + 
+  coord_fixed() +
+  theme_void()
+
+
+
+```
